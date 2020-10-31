@@ -16,7 +16,7 @@ $(function () {
         }
         $.ajax({
             type:'post',
-            url:'http://localhost:8080/api/v1/admin/user/login',
+            url:BigNew.user_info,
             data:{
                 username:userInfo,
                 password:password
@@ -34,8 +34,6 @@ $(function () {
                         window.location.href='./index.html'
                     })
                 }
-
-
             },
             error:function(jqXHR,textStatus,errorThrown){
 

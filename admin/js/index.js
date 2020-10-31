@@ -4,7 +4,7 @@ $(function(){
     //请求用户信息数据
     $.ajax({
         type:'get',
-        url:'http://localhost:8080/api/v1/admin/user/info',
+        url:BigNew.user_info,
         // headers:{
         //     Authorization:window.localStorage.getItem('token')
         // },
