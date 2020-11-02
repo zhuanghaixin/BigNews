@@ -16,7 +16,7 @@ $(function () {
         }
         $.ajax({
             type:'post',
-            url:BigNew.user_info,
+            url:BigNew.user_login,
             data:{
                 username:userInfo,
                 password:password
