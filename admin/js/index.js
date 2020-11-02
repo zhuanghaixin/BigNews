@@ -10,6 +10,12 @@ $(function(){
         // },
         success:function(res){
             console.log(res)
+            if (res.code == 200) {
+                console.log(res)
+                $('.user_info>img').attr('src', res.data.userPic);
+                $('.user_info>span').text(`欢迎回来,${res.data.nickname}`);
+                $('.user_center_link>img').attr('src', res.data.userPic);
+            }
         },
         // error:function(jqXHR,textStatus,errorThrown){
         //     if(jqXHR){
@@ -42,22 +48,24 @@ $(function(){
     })
     //点击一级导航，显示二级导航
     $('.sider .menu .level01>a').on('click',function(){
-        console.log($(this).parent())
+
        const $subMenu=$(this).parent().find('.level02')
-       $subMenu.slideToggle()
+       if($subMenu[0]){
+           $subMenu.slideToggle()
 
-        //箭头旋转
-        $(this).parent()
-            .find("b")
-            .toggleClass("rotate0");
+           //箭头旋转
+           $(this).parent()
+               .find("b")
+               .toggleClass("rotate0");
 
-        //二级导航为选中状态
-        $subMenu.find('li>a').eq(0)[0].click()
+           //二级导航为选中状态
+           $subMenu.find('li>a').eq(0)[0].click()
+       }
+
 
     })
     //点击二级导航，显示选中状态
     $('.sider .menu .level02>li').on('click',function(){
-        console.log(this)
         $(this)
             .addClass("active")
             .siblings("li")
