@@ -94,13 +94,39 @@ $(function () {
     })
 
     //删除数据
-    // $('tbody').on('click', 'a.btn-danger', function (e) {
-    //     console.log('删除');
-    // })
-
-    $('#deleteModal').on('show.bs.modal', function () {
+    
+ 
+    $('tbody').on('click', 'a.btn-danger', function (e) {
+        console.log('删除');
+        
+        console.log( $(this).attr('data-id'));
 
     })
+    $('#deleteModal').on('shown.bs.modal', function (e) {
+
+        let id=$(e.relatedTarget).attr('data-id')
+        $('#delete-btn').on('click',function (e) {
+            $.ajax({
+                type: 'post',
+                url: BigNew.category_delete,
+                data: {
+                    id
+                },
+                success: function (res) {
+                    //console.log(backData);
+                    if(res.code == 204){
+                        alert('删除成功');
+                        $('#deleteModal').modal('hide')
+                        renderData(); 
+                    }
+                }
+            });
+
+        })
+
+    })
+
+
 
 
 
