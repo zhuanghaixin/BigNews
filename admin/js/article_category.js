@@ -46,21 +46,52 @@ $(function () {
 
 
     })
-
-    $('#add-btn-cancel').on('click', () => {
-        $('#addModal').find('form')[0].reset()
-    })
-
-
+    // $('#add-btn-cancel').on('click', () => {
+    //     $('#addModal').find('form')[0].reset()
+    // })
 
     //更新数据
-    // $('tbody').on('click', 'a.btn-info', function (e) {
-    //     console.log('编辑');
-    // })
-    $('#editModal').on('show.bs.modal', function () {
-        console.log(2);
-    })
+    $('#editModal').on('shown.bs.modal', function (e) {
+        // console.log(this);
+        console.log($(e.relatedTarget).parent().prev().prev().text());
+        console.log($(e.relatedTarget).parent().prev().text());
+        const name = $(e.relatedTarget).parent().prev().prev().text()
+        const slug = $(e.relatedTarget).parent().prev().text();
+        const id=$(e.relatedTarget).attr('data-id')
+        $('#edit-name').val(name)
+        $('#edit-slug').val(slug)
+        $('#categoryId').val(id);
 
+    })
+    $('#edit-btn').on('click', function (e) {
+        let id = +$('#categoryId').val()
+        let name = $('#edit-name').val().trim()
+        let slug = $('#edit-slug').val().trim()
+        if (name == '' || slug == '') {
+            alert('新增的文章类别和文章类别别名不能为空!');
+            return
+        }
+        $.ajax({
+            type: 'post',
+            url: BigNew.category_edit,
+            data: {
+                id,
+                name,
+                slug
+            },
+            success: (res) => {
+                console.log(res);
+                if (res.code == 200) {
+                    alert('新增成功!');
+                    $('#editModal').modal('hide')
+                    renderData()
+                    $('#editModal').find('form')[0].reset()
+                    return
+                }
+            }
+        })
+
+    })
 
     //删除数据
     // $('tbody').on('click', 'a.btn-danger', function (e) {
