@@ -11,7 +11,7 @@ $(function(){
         success:function(res){
             console.log(res)
             if (res.code == 200) {
-                console.log(res)
+                // console.log(res)
                 $('.user_info>img').attr('src', res.data.userPic);
                 $('.user_info>span').text(`欢迎回来,${res.data.nickname}`);
                 $('.user_center_link>img').attr('src', res.data.userPic);
