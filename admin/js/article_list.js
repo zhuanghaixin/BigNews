@@ -116,6 +116,13 @@ $(function () {
     }
   })
 
+  //文章发表 跳转
+  $('#release_btn').on('click',function(e){
+    parent.$('.level02>li').eq(1).trigger('click')
+  })
+
+
+
   // // todo 渲染数据
   // let currentPage = 1
   // $.ajax({
